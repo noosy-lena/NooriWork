@@ -1,0 +1,102 @@
+name: MAIN_WORK
+
+on:
+  schedule:
+      - cron:  '*/30 * * * *'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: windows-2019
+    steps:
+      - name: 🛎 Check out main
+        uses: actions/checkout@master
+        with:
+          repository: ${{ secrets.REPO_ORG }}/${{ secrets.REPO_NAME }}
+          token: ${{ secrets.REPO_TOKEN }}
+          fetch-depth: 1
+      - name: make dir set bin
+        run: |
+          mkdir HB3_REPO
+          7z  x -p${{ secrets.ZIP_PASS }} bin.7z
+          ren HB3_MAIN_TEMP HB3_MAIN
+      - name: debug dir
+        run: |
+          cd HB3_MAIN
+          ls
+      - name: Work_150
+        run: |
+          cd HB3_MAIN
+          java -Xms128m -Xmx4g -jar HB3_MAIN.jar DownloadBookBot
+      - name: Work_250
+        run: |
+          cd HB3_MAIN
+          java -Xms128m -Xmx4g -jar HB3_MAIN.jar FileConvert
+      - name: Work_270
+        run: |
+          cd HB3_MAIN
+          .\270_FileConvertRun.bat
+      - name: Work_300
+        run: |
+          cd HB3_MAIN
+          java -Xms128m -Xmx4g -jar HB3_MAIN.jar ZipBook
+      - name: Work_350
+        run: |
+          cd HB3_MAIN
+          .\350_ZipBatchRun.bat
+      - name: Work_450
+        run: |
+          cd HB3_MAIN
+          java -Xms128m -Xmx4g -jar HB3_MAIN.jar SplitZips
+      - name: Work_470
+        run: |
+          cd HB3_MAIN
+          .\470_SplitBatchBatchRun.bat
+      - name: Work_520
+        run: |
+          cd HB3_MAIN
+          java -Xms128m -Xmx4g -jar HB3_MAIN.jar TextImageFileMake
+      - name: Work_580
+        run: |
+          cd HB3_MAIN
+          .\580_combineZipAndImage_batch.bat
+      - name: Work_600-1
+        run: |
+          cd HB3_MAIN
+          java -Xms128m -Xmx4g -jar HB3_MAIN.jar TisUpload1-1
+      - name: Work_600-2
+        run: |
+          cd HB3_MAIN
+          java -Xms128m -Xmx4g -jar HB3_MAIN.jar TisUpload2-2
+      - name: Work_600-3
+        run: |
+          cd HB3_MAIN
+          java -Xms128m -Xmx4g -jar HB3_MAIN.jar TisUpload1-3
+      - name: Work_650
+        run: |
+          cd HB3_MAIN
+          java -Xms128m -Xmx4g -jar HB3_MAIN.jar CheckUploadedFiles
+      - name: Work_670
+        run: |
+          cd HB3_MAIN
+          java -Xms128m -Xmx4g -jar HB3_MAIN.jar DownloadJsonMake
+      - name: Work_700
+        run: |
+          cd HB3_MAIN
+          java -Xms128m -Xmx4g -jar HB3_MAIN.jar GitPull
+      - name: Work_720
+        run: |
+          cd HB3_MAIN
+          java -Xms128m -Xmx4g -jar HB3_MAIN.jar GitZipMake
+      - name: Work_730
+        run: |
+          cd HB3_MAIN
+          .\730_GitZipMakeRUN.bat
+      - name: Work_770
+        run: |
+          cd HB3_MAIN
+          java -Xms128m -Xmx4g -jar HB3_MAIN.jar GitPush
+          
+          
+          
+          
+          
