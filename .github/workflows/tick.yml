@@ -1,0 +1,21 @@
+name: TICK
+
+on:
+  schedule:
+      - cron:  '30 20 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: tick!
+        run: echo $(date) > lastTick.txt
+        
+      - uses: EndBug/add-and-commit@v7
+        with:
+          message: 'Add tick file'
+          add: '*.txt --force'
