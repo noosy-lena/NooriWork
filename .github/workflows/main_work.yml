@@ -2,7 +2,7 @@ name: MAIN_WORK
 
 on:
   schedule:
-      - cron:  '*/30 * * * *'
+      - cron:  '*/60 * * * *'
   workflow_dispatch:
 jobs:
   build:
