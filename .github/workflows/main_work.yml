@@ -62,7 +62,7 @@ jobs:
       - name: Work_600-1
         run: |
           cd HB3_MAIN
-          java -Xms128m -Xmx4g -jar HB3_MAIN.jar TisUpload1-1
+          java -Xms128m -Xmx4g -jar HB3_MAIN.jar TisUpload2-1
       - name: Work_600-2
         run: |
           cd HB3_MAIN
@@ -70,7 +70,7 @@ jobs:
       - name: Work_600-3
         run: |
           cd HB3_MAIN
-          java -Xms128m -Xmx4g -jar HB3_MAIN.jar TisUpload1-3
+          java -Xms128m -Xmx4g -jar HB3_MAIN.jar TisUpload2-3
       - name: Work_650
         run: |
           cd HB3_MAIN
